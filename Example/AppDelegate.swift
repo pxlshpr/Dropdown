@@ -1,13 +1,4 @@
-//
-//  AppDelegate.swift
-//  Example
-//
-//  Created by pxlshpr on 6/8/17.
-//  Copyright © 2017 pxlshpr. All rights reserved.
-//
-
 import UIKit
-import Dropdown
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +7,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
-    Hello.hello()
-    return true
+    // Set white status bar
+    UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
+    
+   return true
   }
 }
