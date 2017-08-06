@@ -11,15 +11,36 @@ import Dropdown
 
 class ViewController: UIViewController {
   
-  @IBOutlet weak var selectedCellLabel: UILabel!
+  lazy var label: UILabel = {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.textAlignment = .center
+    return label
+  }()
+  
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   var menuView: BTNavigationDropdownMenu!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     let items = ["Most Popular", "Latest", "Trending", "Nearest", "Top Picks"]
-    self.selectedCellLabel.text = items.first
+    
+    view.backgroundColor = .lightGray
+    view.addSubview(label)
+    NSLayoutConstraint.activate([
+      NSLayoutConstraint(item: label, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0),
+      NSLayoutConstraint(item: label, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0),
+      NSLayoutConstraint(item: label, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0)
+      ])
+    
+    self.label.text = items.first
     self.navigationController?.navigationBar.isTranslucent = false
     self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.0/255.0, green:180/255.0, blue:220/255.0, alpha: 1.0)
+    self.navigationController?.navigationBar.barStyle = .black
     self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
     
     // "Old" version
@@ -43,7 +64,7 @@ class ViewController: UIViewController {
     menuView.maskBackgroundOpacity = 0.3
     menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> Void in
       print("Did select item at index: \(indexPath)")
-      self.selectedCellLabel.text = items[indexPath]
+      self.label.text = items[indexPath]
     }
     
     self.navigationItem.titleView = menuView
