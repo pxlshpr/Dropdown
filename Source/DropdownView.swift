@@ -199,9 +199,13 @@ open class DropdownView: UIView {
     titleSize = (titleToDisplay as NSString).size(attributes: [NSFontAttributeName:self.configuration.navigationBarTitleFont])
     
     // Set frame
-    let frame = CGRect(x: 0, y: 0, width: titleSize.width + (self.configuration.arrowPadding + self.configuration.arrowImage.size.width)*2, height: self.navigationController!.navigationBar.frame.height)
+    let width = titleSize.width + (self.configuration.arrowPadding + self.configuration.arrowImage.size.width)*2
+    let height = self.navigationController!.navigationBar.frame.height
+    let frame = CGRect(x: 0, y: 0, width: width, height: height)
     
-    super.init(frame:frame)
+    super.init(frame: .zero)
+//    super.init(frame:frame)
+    self.translatesAutoresizingMaskIntoConstraints = false
     
     self.isShown = false
     self.items = items

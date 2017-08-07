@@ -23,11 +23,11 @@ class ViewController: UIViewController {
     return .lightContent
   }
   
-  var menuView: DropdownView!
+  var dropdownView: DropdownView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    let items = ["Most Popular", "Latest", "Trending", "Nearest", "Top Picks"]
+    let items = ["Most Popular Most Popular Most Popular Most Popular", "Latest", "Trending", "Nearest", "Top Picks"]
     
     view.backgroundColor = .lightGray
     view.addSubview(label)
@@ -46,27 +46,27 @@ class ViewController: UIViewController {
     // "Old" version
     // menuView = DropdownView(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Dropdown Menu", items: items)
     
-    menuView = DropdownView(navigationController: self.navigationController, containerView: self.navigationController!.view, title: DropdownTitle.index(2), items: items)
+    dropdownView = DropdownView(navigationController: self.navigationController, containerView: self.navigationController!.view, title: DropdownTitle.index(2), items: items)
     
     // Another way to initialize:
     // menuView = DropdownView(navigationController: self.navigationController, containerView: self.navigationController!.view, title: DropdownTitle.title("Dropdown Menu"), items: items)
     
-    menuView.cellHeight = 50
-    menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
-    menuView.cellSelectionColor = UIColor(red: 0.0/255.0, green:160.0/255.0, blue:195.0/255.0, alpha: 1.0)
-    menuView.shouldKeepSelectedCellColor = true
-    menuView.cellTextLabelColor = UIColor.white
-    menuView.cellTextLabelFont = UIFont(name: "Avenir-Heavy", size: 17)
-    menuView.cellTextLabelAlignment = .left // .Center // .Right // .Left
-    menuView.arrowPadding = 15
-    menuView.animationDuration = 0.5
-    menuView.maskBackgroundColor = UIColor.black
-    menuView.maskBackgroundOpacity = 0.3
-    menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> Void in
+    dropdownView.cellHeight = 50
+    dropdownView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
+    dropdownView.cellSelectionColor = UIColor(red: 0.0/255.0, green:160.0/255.0, blue:195.0/255.0, alpha: 1.0)
+    dropdownView.shouldKeepSelectedCellColor = true
+    dropdownView.cellTextLabelColor = UIColor.white
+    dropdownView.cellTextLabelFont = UIFont(name: "Avenir-Heavy", size: 17)
+    dropdownView.cellTextLabelAlignment = .left // .Center // .Right // .Left
+    dropdownView.arrowPadding = 15
+    dropdownView.animationDuration = 0.5
+    dropdownView.maskBackgroundColor = UIColor.black
+    dropdownView.maskBackgroundOpacity = 0.3
+    dropdownView.didSelectItemAtIndexHandler = {(indexPath: Int) -> Void in
       print("Did select item at index: \(indexPath)")
       self.label.text = items[indexPath]
     }
     
-    self.navigationItem.titleView = menuView
+    self.navigationItem.titleView = dropdownView
   }
 }
