@@ -198,7 +198,7 @@ open class DropdownView: UIView {
   open var isShown: Bool!
   
   fileprivate weak var navigationController: UINavigationController?
-  fileprivate var configuration = BTConfiguration()
+  fileprivate var configuration = DropdownUIConfiguration()
   fileprivate var topSeparator: UIView!
   fileprivate var menuButton: UIButton!
   fileprivate var menuTitle: UILabel!

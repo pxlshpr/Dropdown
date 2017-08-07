@@ -29,9 +29,9 @@ class BTTableViewCell: UITableViewCell {
     
     var checkmarkIcon: UIImageView!
     var cellContentFrame: CGRect!
-    var configuration: BTConfiguration!
+    var configuration: DropdownUIConfiguration!
     
-    init(style: UITableViewCellStyle, reuseIdentifier: String?, configuration: BTConfiguration) {
+    init(style: UITableViewCellStyle, reuseIdentifier: String?, configuration: DropdownUIConfiguration) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.configuration = configuration

@@ -1,5 +1,5 @@
 //
-//  BTConfiguration.swift
+//  DropdownUIConfiguration.swift
 //
 //  Copyright (c) 2017 PHAM BA THO (phambatho@gmail.com). All rights reserved.
 //
@@ -23,7 +23,7 @@
 
 import UIKit
 
-final class BTConfiguration {
+final class DropdownUIConfiguration {
     var menuTitleColor: UIColor?
     var cellHeight: CGFloat!
     var cellBackgroundColor: UIColor?
@@ -50,7 +50,7 @@ final class BTConfiguration {
     
     func defaultValue() {
         // Path for image
-        let bundle = Bundle(for: BTConfiguration.self)
+        let bundle = Bundle(for: DropdownUIConfiguration.self)
         let url = bundle.url(forResource: "DropdownView", withExtension: "bundle")
         let imageBundle = Bundle(url: url!)
         let checkMarkImagePath = imageBundle?.path(forResource: "checkmark_icon", ofType: "png")

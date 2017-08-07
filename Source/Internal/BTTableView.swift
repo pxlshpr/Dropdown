@@ -26,7 +26,7 @@ import UIKit
 class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     // Public properties
-    var configuration: BTConfiguration!
+    var configuration: DropdownUIConfiguration!
     var selectRowAtIndexPathHandler: ((_ indexPath: Int) -> ())?
     
     // Private properties
@@ -37,7 +37,7 @@ class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(frame: CGRect, items: [String], title: String, configuration: BTConfiguration) {
+    init(frame: CGRect, items: [String], title: String, configuration: DropdownUIConfiguration) {
         super.init(frame: frame, style: UITableViewStyle.plain)
         
         self.items = items
