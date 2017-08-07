@@ -5,88 +5,54 @@ open class DropdownView: UIView {
   
   // The color of menu title. Default is darkGrayColor()
   open var menuTitleColor: UIColor! {
-    get {
-      return self.configuration.menuTitleColor
-    }
-    set(value) {
-      self.configuration.menuTitleColor = value
-    }
+    get { return self.configuration.menuTitleColor }
+    set(value) { self.configuration.menuTitleColor = value }
   }
   
   // The height of the cell. Default is 50
   open var cellHeight: NSNumber! {
-    get {
-      return self.configuration.cellHeight as NSNumber!
-    }
-    set(value) {
-      self.configuration.cellHeight = CGFloat(value)
-    }
+    get { return self.configuration.cellHeight as NSNumber! }
+    set(value) { self.configuration.cellHeight = CGFloat(value) }
   }
   
   // The color of the cell background. Default is whiteColor()
   open var cellBackgroundColor: UIColor! {
-    get {
-      return self.configuration.cellBackgroundColor
-    }
-    set(color) {
-      self.configuration.cellBackgroundColor = color
-    }
+    get { return self.configuration.cellBackgroundColor }
+    set(color) { self.configuration.cellBackgroundColor = color }
   }
   
   // The tint color of the arrow. Default is whiteColor()
   open var arrowTintColor: UIColor! {
-    get {
-      return self.menuArrow.tintColor
-    }
-    set(color) {
-      self.menuArrow.tintColor = color
-    }
+    get { return self.menuArrow.tintColor }
+    set(color) { self.menuArrow.tintColor = color }
   }
   
   open var cellSeparatorColor: UIColor! {
-    get {
-      return self.configuration.cellSeparatorColor
-    }
-    set(value) {
-      self.configuration.cellSeparatorColor = value
-    }
+    get { return self.configuration.cellSeparatorColor }
+    set(value) { self.configuration.cellSeparatorColor = value }
   }
   
   // The color of the text inside cell. Default is darkGrayColor()
   open var cellTextLabelColor: UIColor! {
-    get {
-      return self.configuration.cellTextLabelColor
-    }
-    set(value) {
-      self.configuration.cellTextLabelColor = value
-    }
+    get { return self.configuration.cellTextLabelColor }
+    set(value) { self.configuration.cellTextLabelColor = value }
   }
   
   // The color of the text inside a selected cell. Default is darkGrayColor()
   open var selectedCellTextLabelColor: UIColor! {
-    get {
-      return self.configuration.selectedCellTextLabelColor
-    }
-    set(value) {
-      self.configuration.selectedCellTextLabelColor = value
-    }
+    get { return self.configuration.selectedCellTextLabelColor }
+    set(value) { self.configuration.selectedCellTextLabelColor = value }
   }
   
   // The font of the text inside cell. Default is HelveticaNeue-Bold, size 17
   open var cellTextLabelFont: UIFont! {
-    get {
-      return self.configuration.cellTextLabelFont
-    }
-    set(value) {
-      self.configuration.cellTextLabelFont = value
-    }
+    get { return self.configuration.cellTextLabelFont }
+    set(value) { self.configuration.cellTextLabelFont = value }
   }
   
   // The font of the navigation bar title. Default is HelveticaNeue-Bold, size 17
   open var navigationBarTitleFont: UIFont! {
-    get {
-      return self.configuration.navigationBarTitleFont
-    }
+    get { return self.configuration.navigationBarTitleFont }
     set(value) {
       self.configuration.navigationBarTitleFont = value
       self.menuTitle.font = self.configuration.navigationBarTitleFont
@@ -95,59 +61,37 @@ open class DropdownView: UIView {
   
   // The alignment of the text inside cell. Default is .Left
   open var cellTextLabelAlignment: NSTextAlignment! {
-    get {
-      return self.configuration.cellTextLabelAlignment
-    }
-    set(value) {
-      self.configuration.cellTextLabelAlignment = value
-    }
+    get { return self.configuration.cellTextLabelAlignment }
+    set(value) { self.configuration.cellTextLabelAlignment = value }
   }
   
   // The color of the cell when the cell is selected. Default is lightGrayColor()
   open var cellSelectionColor: UIColor! {
-    get {
-      return self.configuration.cellSelectionColor
-    }
-    set(value) {
-      self.configuration.cellSelectionColor = value
-    }
+    get { return self.configuration.cellSelectionColor }
+    set(value) { self.configuration.cellSelectionColor = value }
   }
   
   // The checkmark icon of the cell
   open var checkMarkImage: UIImage! {
-    get {
-      return self.configuration.checkMarkImage
-    }
-    set(value) {
-      self.configuration.checkMarkImage = value
-    }
+    get { return self.configuration.checkMarkImage }
+    set(value) { self.configuration.checkMarkImage = value }
   }
   
   // The boolean value that decides if selected color of cell is visible when the menu is shown. Default is false
   open var shouldKeepSelectedCellColor: Bool! {
-    get {
-      return self.configuration.shouldKeepSelectedCellColor
-    }
-    set(value) {
-      self.configuration.shouldKeepSelectedCellColor = value
-    }
+    get { return self.configuration.shouldKeepSelectedCellColor }
+    set(value) { self.configuration.shouldKeepSelectedCellColor = value }
   }
   
   // The animation duration of showing/hiding menu. Default is 0.3
   open var animationDuration: TimeInterval! {
-    get {
-      return self.configuration.animationDuration
-    }
-    set(value) {
-      self.configuration.animationDuration = value
-    }
+    get { return self.configuration.animationDuration }
+    set(value) { self.configuration.animationDuration = value }
   }
   
   // The arrow next to navigation title
   open var arrowImage: UIImage! {
-    get {
-      return self.configuration.arrowImage
-    }
+    get { return self.configuration.arrowImage }
     set(value) {
       self.configuration.arrowImage = value.withRenderingMode(.alwaysTemplate)
       self.menuArrow.image = self.configuration.arrowImage
@@ -156,42 +100,26 @@ open class DropdownView: UIView {
   
   // The padding between navigation title and arrow
   open var arrowPadding: CGFloat! {
-    get {
-      return self.configuration.arrowPadding
-    }
-    set(value) {
-      self.configuration.arrowPadding = value
-    }
+    get { return self.configuration.arrowPadding }
+    set(value) { self.configuration.arrowPadding = value }
   }
   
   // The color of the mask layer. Default is blackColor()
   open var maskBackgroundColor: UIColor! {
-    get {
-      return self.configuration.maskBackgroundColor
-    }
-    set(value) {
-      self.configuration.maskBackgroundColor = value
-    }
+    get { return self.configuration.maskBackgroundColor }
+    set(value) { self.configuration.maskBackgroundColor = value }
   }
   
   // The opacity of the mask layer. Default is 0.3
   open var maskBackgroundOpacity: CGFloat! {
-    get {
-      return self.configuration.maskBackgroundOpacity
-    }
-    set(value) {
-      self.configuration.maskBackgroundOpacity = value
-    }
+    get { return self.configuration.maskBackgroundOpacity }
+    set(value) { self.configuration.maskBackgroundOpacity = value }
   }
   
   // The boolean value that decides if you want to change the title text when a cell is selected. Default is true
   open var shouldChangeTitleText: Bool! {
-    get {
-      return self.configuration.shouldChangeTitleText
-    }
-    set(value) {
-      self.configuration.shouldChangeTitleText = value
-    }
+    get { return self.configuration.shouldChangeTitleText }
+    set(value) { self.configuration.shouldChangeTitleText = value }
   }
   
   open var didSelectItemAtIndexHandler: ((_ indexPath: Int) -> ())?
@@ -317,16 +245,13 @@ open class DropdownView: UIView {
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
     self.tableView = DropdownTableView(frame: CGRect(x: menuWrapperBounds.origin.x, y: menuWrapperBounds.origin.y + 0.5, width: menuWrapperBounds.width, height: menuWrapperBounds.height + 300 - navBarHeight - statusBarHeight), items: items, title: titleToDisplay, configuration: self.configuration)
     
-    self.tableView.selectRowAtIndexPathHandler = { [weak self] (indexPath: Int) -> () in
-      guard let selfie = self else {
-        return
+    self.tableView.selectRowAtIndexPathHandler = { [unowned self] (indexPath: Int) -> () in
+      self.didSelectItemAtIndexHandler!(indexPath)
+      if self.shouldChangeTitleText! {
+        self.setMenuTitle("\(self.tableView.items[indexPath])")
       }
-      selfie.didSelectItemAtIndexHandler!(indexPath)
-      if selfie.shouldChangeTitleText! {
-        selfie.setMenuTitle("\(selfie.tableView.items[indexPath])")
-      }
-      self?.hideMenu()
-      self?.layoutSubviews()
+      self.hideMenu()
+      self.layoutSubviews()
     }
     
     // Add background view & table view to container view
