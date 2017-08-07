@@ -12,13 +12,13 @@
 		E206D3BA1F36C332001F591F /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206D3B61F36C2FB001F591F /* BaseTestCase.swift */; };
 		E22D86B81F36C3F700650B9A /* DropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D86B71F36C3F700650B9A /* DropdownView.swift */; };
 		E22D87271F36CEB200650B9A /* DropdownTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D87261F36CEB100650B9A /* DropdownTitle.swift */; };
-		E22D87311F36CF0300650B9A /* BTNavigationDropdownMenu.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E22D87281F36CF0300650B9A /* BTNavigationDropdownMenu.bundle */; };
+		E22D87311F36CF0300650B9A /* Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E22D87281F36CF0300650B9A /* Images.bundle */; };
 		E22D87321F36CF0300650B9A /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D872A1F36CF0300650B9A /* UIView+Extension.swift */; };
 		E22D87331F36CF0300650B9A /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D872B1F36CF0300650B9A /* UIViewController+Extension.swift */; };
 		E22D87341F36CF0300650B9A /* DropdownUIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D872D1F36CF0300650B9A /* DropdownUIConfiguration.swift */; };
-		E22D87351F36CF0300650B9A /* BTTableCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D872E1F36CF0300650B9A /* BTTableCellContentView.swift */; };
-		E22D87361F36CF0300650B9A /* BTTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D872F1F36CF0300650B9A /* BTTableView.swift */; };
-		E22D87371F36CF0300650B9A /* BTTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D87301F36CF0300650B9A /* BTTableViewCell.swift */; };
+		E22D87351F36CF0300650B9A /* DropdownCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D872E1F36CF0300650B9A /* DropdownCellContentView.swift */; };
+		E22D87361F36CF0300650B9A /* DropdownTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D872F1F36CF0300650B9A /* DropdownTableView.swift */; };
+		E22D87371F36CF0300650B9A /* DropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D87301F36CF0300650B9A /* DropdownTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,13 +40,13 @@
 		E206D3B81F36C305001F591F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Tests/Info.plist; sourceTree = SOURCE_ROOT; };
 		E22D86B71F36C3F700650B9A /* DropdownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropdownView.swift; path = Source/DropdownView.swift; sourceTree = SOURCE_ROOT; };
 		E22D87261F36CEB100650B9A /* DropdownTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropdownTitle.swift; path = Source/DropdownTitle.swift; sourceTree = SOURCE_ROOT; };
-		E22D87281F36CF0300650B9A /* BTNavigationDropdownMenu.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = BTNavigationDropdownMenu.bundle; path = Source/BTNavigationDropdownMenu.bundle; sourceTree = SOURCE_ROOT; };
+		E22D87281F36CF0300650B9A /* Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Images.bundle; path = Source/Images.bundle; sourceTree = SOURCE_ROOT; };
 		E22D872A1F36CF0300650B9A /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		E22D872B1F36CF0300650B9A /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		E22D872D1F36CF0300650B9A /* DropdownUIConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropdownUIConfiguration.swift; sourceTree = "<group>"; };
-		E22D872E1F36CF0300650B9A /* BTTableCellContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTTableCellContentView.swift; sourceTree = "<group>"; };
-		E22D872F1F36CF0300650B9A /* BTTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTTableView.swift; sourceTree = "<group>"; };
-		E22D87301F36CF0300650B9A /* BTTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTTableViewCell.swift; sourceTree = "<group>"; };
+		E22D872E1F36CF0300650B9A /* DropdownCellContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropdownCellContentView.swift; sourceTree = "<group>"; };
+		E22D872F1F36CF0300650B9A /* DropdownTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropdownTableView.swift; sourceTree = "<group>"; };
+		E22D87301F36CF0300650B9A /* DropdownTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropdownTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +89,7 @@
 		E206D3971F36C18E001F591F /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				E22D87281F36CF0300650B9A /* BTNavigationDropdownMenu.bundle */,
+				E22D87281F36CF0300650B9A /* Images.bundle */,
 				E22D86B71F36C3F700650B9A /* DropdownView.swift */,
 				E22D87261F36CEB100650B9A /* DropdownTitle.swift */,
 				E22D87291F36CF0300650B9A /* Extension */,
@@ -148,10 +148,10 @@
 		E22D872C1F36CF0300650B9A /* Internal */ = {
 			isa = PBXGroup;
 			children = (
+				E22D872F1F36CF0300650B9A /* DropdownTableView.swift */,
+				E22D87301F36CF0300650B9A /* DropdownTableViewCell.swift */,
+				E22D872E1F36CF0300650B9A /* DropdownCellContentView.swift */,
 				E22D872D1F36CF0300650B9A /* DropdownUIConfiguration.swift */,
-				E22D872E1F36CF0300650B9A /* BTTableCellContentView.swift */,
-				E22D872F1F36CF0300650B9A /* BTTableView.swift */,
-				E22D87301F36CF0300650B9A /* BTTableViewCell.swift */,
 			);
 			name = Internal;
 			path = Source/Internal;
@@ -253,7 +253,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E22D87311F36CF0300650B9A /* BTNavigationDropdownMenu.bundle in Resources */,
+				E22D87311F36CF0300650B9A /* Images.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,11 +272,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E22D87331F36CF0300650B9A /* UIViewController+Extension.swift in Sources */,
-				E22D87371F36CF0300650B9A /* BTTableViewCell.swift in Sources */,
+				E22D87371F36CF0300650B9A /* DropdownTableViewCell.swift in Sources */,
 				E22D87341F36CF0300650B9A /* DropdownUIConfiguration.swift in Sources */,
 				E22D87321F36CF0300650B9A /* UIView+Extension.swift in Sources */,
-				E22D87361F36CF0300650B9A /* BTTableView.swift in Sources */,
-				E22D87351F36CF0300650B9A /* BTTableCellContentView.swift in Sources */,
+				E22D87361F36CF0300650B9A /* DropdownTableView.swift in Sources */,
+				E22D87351F36CF0300650B9A /* DropdownCellContentView.swift in Sources */,
 				E22D87271F36CEB200650B9A /* DropdownTitle.swift in Sources */,
 				E22D86B81F36C3F700650B9A /* DropdownView.swift in Sources */,
 			);
