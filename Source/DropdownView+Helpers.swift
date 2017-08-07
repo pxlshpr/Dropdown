@@ -34,7 +34,7 @@ extension DropdownView {
     self.tableView.reloadData()
     
     if self.shouldChangeTitleText! {
-      self.menuTitle.text = "\(self.tableView.items[index])"
+      label.text = "\(self.tableView.items[index])"
     }
   }
   
@@ -125,10 +125,8 @@ extension DropdownView {
   }
   
   func rotateArrow() {
-    UIView.animate(withDuration: self.configuration.animationDuration, animations: {[weak self] () -> () in
-      if let selfie = self {
-        selfie.menuArrow.transform = selfie.menuArrow.transform.rotated(by: 180 * CGFloat(Double.pi/180))
-      }
+    UIView.animate(withDuration: self.configuration.animationDuration, animations: {[unowned self] () -> () in
+      self.arrowImageView.transform = self.arrowImageView.transform.rotated(by: 180 * CGFloat(Double.pi/180))
     })
   }
   

@@ -1,6 +1,8 @@
 import UIKit
 import TinyConstraints
 
+//TODO: support orientation changes (works on either orientation but breaks when changed)
+
 // MARK: DropdownView
 open class DropdownView: UIView {
   
@@ -24,8 +26,8 @@ open class DropdownView: UIView {
   
   // The tint color of the arrow. Default is whiteColor()
   open var arrowTintColor: UIColor! {
-    get { return self.menuArrow.tintColor }
-    set(color) { self.menuArrow.tintColor = color }
+    get { return self.arrowImageView.tintColor }
+    set(color) { self.arrowImageView.tintColor = color }
   }
   
   open var cellSeparatorColor: UIColor! {
@@ -56,7 +58,7 @@ open class DropdownView: UIView {
     get { return self.configuration.navigationBarTitleFont }
     set(value) {
       self.configuration.navigationBarTitleFont = value
-      self.menuTitle.font = self.configuration.navigationBarTitleFont
+      self.label.font = self.configuration.navigationBarTitleFont
     }
   }
   
@@ -95,7 +97,7 @@ open class DropdownView: UIView {
     get { return self.configuration.arrowImage }
     set(value) {
       self.configuration.arrowImage = value.withRenderingMode(.alwaysTemplate)
-      self.menuArrow.image = self.configuration.arrowImage
+      self.arrowImageView.image = self.configuration.arrowImage
     }
   }
   
@@ -130,19 +132,35 @@ open class DropdownView: UIView {
   internal var configuration = DropdownUIConfiguration()
   internal var topSeparator: UIView!
 //  internal var menuButton: UIButton!
-  internal var menuTitle: UILabel!
-  internal var menuArrow: UIImageView!
   internal var backgroundView: UIView!
   internal var tableView: DropdownTableView!
   internal var items: [String]!
   internal var menuWrapper: UIView!
   
+  lazy internal var label: UILabel = {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.backgroundColor = .green
+    label.textColor = self.menuTitleColor
+    label.font = self.configuration.navigationBarTitleFont
+    label.textAlignment = self.configuration.cellTextLabelAlignment
+    label.textColor = self.configuration.menuTitleColor //TODO: remove this as its a duplicate
+    return label
+  }()
+  
   lazy internal var button: UIButton = {
-    let button = UIButton(frame: .zero)
+    let button = UIButton()
     button.translatesAutoresizingMaskIntoConstraints = false
     button.backgroundColor = .red
     button.addTarget(self, action: #selector(DropdownView.menuButtonTapped(_:)), for: UIControlEvents.touchUpInside)
     return button
+  }()
+  
+  lazy internal var arrowImageView: UIImageView = {
+    let imageView = UIImageView(image: self.configuration.arrowImage.withRenderingMode(.alwaysTemplate))
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.backgroundColor = .blue
+    return imageView
   }()
   
   //MARK: - Lifecycle
@@ -212,29 +230,24 @@ open class DropdownView: UIView {
     // Set frame
     let width = titleSize.width + (self.configuration.arrowPadding + self.configuration.arrowImage.size.width)*2
     let height = self.navigationController!.navigationBar.frame.height
-    let frame = CGRect(x: 0, y: 0, width: width, height: height)
     
     super.init(frame: .zero)
-
     self.translatesAutoresizingMaskIntoConstraints = false
-    self.width(width)
-    self.height(height)
     
     self.isShown = false
     self.items = items
     
     addSubview(button)
+    self.width(width)
+    self.height(height)
     button.edges(to: self)
     
-    self.menuTitle = UILabel(frame: frame)
-    self.menuTitle.text = titleToDisplay
-    self.menuTitle.textColor = self.menuTitleColor
-    self.menuTitle.font = self.configuration.navigationBarTitleFont
-    self.menuTitle.textAlignment = self.configuration.cellTextLabelAlignment
-    button.addSubview(self.menuTitle)
+    label.text = titleToDisplay
+    button.addSubview(self.label)
     
-    self.menuArrow = UIImageView(image: self.configuration.arrowImage.withRenderingMode(.alwaysTemplate))
-    button.addSubview(self.menuArrow)
+    arrowImageView = UIImageView(image: self.configuration.arrowImage.withRenderingMode(.alwaysTemplate))
+    button.addSubview(self.arrowImageView)
+    arrowImageView.backgroundColor = .blue
     
     let menuWrapperBounds = window.bounds
     
@@ -263,7 +276,7 @@ open class DropdownView: UIView {
     self.tableView.selectRowAtIndexPathHandler = { [unowned self] (indexPath: Int) -> () in
       self.didSelectItemAtIndexHandler!(indexPath)
       if self.shouldChangeTitleText! {
-        self.menuTitle.text = "\(self.tableView.items[indexPath])"
+        self.label.text = "\(self.tableView.items[indexPath])"
       }
       self.hideMenu()
       self.layoutSubviews()
@@ -291,12 +304,17 @@ open class DropdownView: UIView {
   }
   
   override open func layoutSubviews() {
-    self.menuTitle.sizeToFit()
-    self.menuTitle.center = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/2)
-    self.menuTitle.textColor = self.configuration.menuTitleColor
-    self.menuArrow.sizeToFit()
-    self.menuArrow.center = CGPoint(x: self.menuTitle.frame.maxX + self.configuration.arrowPadding, y: self.frame.size.height/2)
+    label.sizeToFit()
+    label.center(in: self)
+//    label.center = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/2)
+    
+    arrowImageView.sizeToFit()
+    arrowImageView.centerY(to: self)
+    arrowImageView.leftToRight(of: label, offset: configuration.arrowPadding - (self.configuration.arrowImage.size.width / 2.0))
+//    arrowImageView.center = CGPoint(x: self.label.frame.maxX + self.configuration.arrowPadding, y: self.frame.size.height/2)
+    
     self.menuWrapper.frame.origin.y = self.navigationController!.navigationBar.frame.maxY
+    
     self.tableView.reloadData()
   }
 }
