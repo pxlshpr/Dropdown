@@ -135,7 +135,6 @@ open class DropdownView: UIView {
   internal var backgroundView: UIView!
   internal var tableView: DropdownTableView!
   internal var items: [String]!
-  internal var menuWrapper: UIView!
   
   lazy internal var label: UILabel = {
     let label = UILabel()
@@ -161,6 +160,16 @@ open class DropdownView: UIView {
     imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.backgroundColor = .blue
     return imageView
+  }()
+  
+  lazy internal var menuView: UIView = {
+    //TODO: change this
+    let menuViewBounds = UIApplication.shared.keyWindow!.bounds
+    let view = UIView(frame: CGRect(x: menuViewBounds.origin.x, y: 0, width: menuViewBounds.width, height: menuViewBounds.height))
+    view.viewIdentifier = "BTNavigationDropDownMenu-MenuWrapper"
+    view.clipsToBounds = true
+    view.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
+    return view
   }()
   
   //MARK: - Lifecycle
@@ -249,16 +258,16 @@ open class DropdownView: UIView {
     button.addSubview(self.arrowImageView)
     arrowImageView.backgroundColor = .blue
     
-    let menuWrapperBounds = window.bounds
+    let menuViewBounds = window.bounds
     
-    // Set up DropdownMenu
-    self.menuWrapper = UIView(frame: CGRect(x: menuWrapperBounds.origin.x, y: 0, width: menuWrapperBounds.width, height: menuWrapperBounds.height))
-    self.menuWrapper.viewIdentifier = "BTNavigationDropDownMenu-MenuWrapper"
-    self.menuWrapper.clipsToBounds = true
-    self.menuWrapper.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
+//    // Set up DropdownMenu
+//    self.menuView = UIView(frame: CGRect(x: menuWrapperBounds.origin.x, y: 0, width: menuWrapperBounds.width, height: menuWrapperBounds.height))
+//    self.menuView.viewIdentifier = "BTNavigationDropDownMenu-MenuWrapper"
+//    self.menuView.clipsToBounds = true
+//    self.menuView.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
     
     // Init background view (under table view)
-    self.backgroundView = UIView(frame: menuWrapperBounds)
+    self.backgroundView = UIView(frame: menuViewBounds)
     self.backgroundView.backgroundColor = self.configuration.maskBackgroundColor
     self.backgroundView.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
     
@@ -271,7 +280,7 @@ open class DropdownView: UIView {
     // Init table view
     let navBarHeight = self.navigationController?.navigationBar.bounds.size.height ?? 0
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
-    self.tableView = DropdownTableView(frame: CGRect(x: menuWrapperBounds.origin.x, y: menuWrapperBounds.origin.y + 0.5, width: menuWrapperBounds.width, height: menuWrapperBounds.height + 300 - navBarHeight - statusBarHeight), items: items, title: titleToDisplay, configuration: self.configuration)
+    self.tableView = DropdownTableView(frame: CGRect(x: menuViewBounds.origin.x, y: menuViewBounds.origin.y + 0.5, width: menuViewBounds.width, height: menuViewBounds.height + 300 - navBarHeight - statusBarHeight), items: items, title: titleToDisplay, configuration: self.configuration)
     
     self.tableView.selectRowAtIndexPathHandler = { [unowned self] (indexPath: Int) -> () in
       self.didSelectItemAtIndexHandler!(indexPath)
@@ -283,13 +292,13 @@ open class DropdownView: UIView {
     }
     
     // Add background view & table view to container view
-    self.menuWrapper.addSubview(self.backgroundView)
-    self.menuWrapper.addSubview(self.tableView)
+    self.menuView.addSubview(self.backgroundView)
+    self.menuView.addSubview(self.tableView)
     
     // Add Line on top
-    self.topSeparator = UIView(frame: CGRect(x: 0, y: 0, width: menuWrapperBounds.size.width, height: 0.5))
+    self.topSeparator = UIView(frame: CGRect(x: 0, y: 0, width: menuViewBounds.size.width, height: 0.5))
     self.topSeparator.autoresizingMask = UIViewAutoresizing.flexibleWidth
-    self.menuWrapper.addSubview(self.topSeparator)
+    self.menuView.addSubview(self.topSeparator)
     
     // Remove MenuWrapper from container view to avoid leaks
     containerView.subviews
@@ -297,23 +306,21 @@ open class DropdownView: UIView {
       .forEach({$0.removeFromSuperview()})
     
     // Add Menu View to container view
-    containerView.addSubview(self.menuWrapper)
+    containerView.addSubview(self.menuView)
     
     // By default, hide menu view
-    self.menuWrapper.isHidden = true
+    self.menuView.isHidden = true
   }
   
   override open func layoutSubviews() {
     label.sizeToFit()
     label.center(in: self)
-//    label.center = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/2)
     
     arrowImageView.sizeToFit()
     arrowImageView.centerY(to: self)
     arrowImageView.leftToRight(of: label, offset: configuration.arrowPadding - (self.configuration.arrowImage.size.width / 2.0))
-//    arrowImageView.center = CGPoint(x: self.label.frame.maxX + self.configuration.arrowPadding, y: self.frame.size.height/2)
     
-    self.menuWrapper.frame.origin.y = self.navigationController!.navigationBar.frame.maxY
+    self.menuView.frame.origin.y = self.navigationController!.navigationBar.frame.maxY
     
     self.tableView.reloadData()
   }

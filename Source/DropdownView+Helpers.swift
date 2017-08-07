@@ -48,7 +48,7 @@ extension DropdownView {
   }
   
   func showMenu() {
-    self.menuWrapper.frame.origin.y = self.navigationController!.navigationBar.frame.maxY
+    self.menuView.frame.origin.y = self.navigationController!.navigationBar.frame.maxY
     
     self.isShown = true
     
@@ -63,7 +63,7 @@ extension DropdownView {
     self.rotateArrow()
     
     // Visible menu view
-    self.menuWrapper.isHidden = false
+    self.menuView.isHidden = false
     
     // Change background alpha
     self.backgroundView.alpha = 0
@@ -74,7 +74,7 @@ extension DropdownView {
     // Reload data to dismiss highlight color of selected cell
     self.tableView.reloadData()
     
-    self.menuWrapper.superview?.bringSubview(toFront: self.menuWrapper)
+    self.menuView.superview?.bringSubview(toFront: self.menuView)
     
     UIView.animate(
       withDuration: self.configuration.animationDuration * 1.5,
@@ -119,7 +119,7 @@ extension DropdownView {
         self.backgroundView.alpha = 0 },
       completion: { _ in
         if self.isShown == false && self.tableView.frame.origin.y == -CGFloat(self.items.count) * self.configuration.cellHeight - 300 {
-          self.menuWrapper.isHidden = true
+          self.menuView.isHidden = true
         }
     })
   }
