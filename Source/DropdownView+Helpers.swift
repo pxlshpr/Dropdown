@@ -24,17 +24,18 @@ extension DropdownView {
   
   open func updateItems(_ items: [String]) {
     if !items.isEmpty {
-      self.tableView.items = items
-      self.tableView.reloadData()
+      
+//      self.tableView.items = items
+//      self.tableView.reloadData()
     }
   }
   
   open func setSelected(index: Int) {
-    self.tableView.selectedIndexPath = index
-    self.tableView.reloadData()
+//    self.tableView.selectedIndexPath = index
+//    self.tableView.reloadData()
     
     if self.shouldChangeTitleText! {
-      label.text = "\(self.tableView.items[index])"
+//      label.text = "\(self.tableView.items[index])"
     }
   }
   
@@ -54,8 +55,10 @@ extension DropdownView {
     
     // Table view header
     let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 300))
-    headerView.backgroundColor = self.configuration.cellBackgroundColor
-    self.tableView.tableHeaderView = headerView
+//    headerView.backgroundColor = self.configuration.cellBackgroundColor
+    headerView.backgroundColor = .purple
+    
+//    self.tableView.tableHeaderView = headerView
     
     self.topSeparator.backgroundColor = self.configuration.cellSeparatorColor
     
@@ -69,10 +72,10 @@ extension DropdownView {
     self.backgroundView.alpha = 0
     
     // Animation
-    self.tableView.frame.origin.y = -CGFloat(self.items.count) * self.configuration.cellHeight - 300
+//    self.tableView.frame.origin.y = -CGFloat(self.items.count) * self.configuration.cellHeight - 300
     
     // Reload data to dismiss highlight color of selected cell
-    self.tableView.reloadData()
+//    self.tableView.reloadData()
     
     self.menuView.superview?.bringSubview(toFront: self.menuView)
     
@@ -83,7 +86,7 @@ extension DropdownView {
       initialSpringVelocity: 0.5,
       options: [],
       animations: {
-        self.tableView.frame.origin.y = CGFloat(-300)
+//        self.tableView.frame.origin.y = CGFloat(-300)
         self.backgroundView.alpha = self.configuration.maskBackgroundOpacity },
       completion: nil
     )

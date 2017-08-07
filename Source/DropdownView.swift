@@ -130,16 +130,11 @@ open class DropdownView: UIView {
   
   internal weak var navigationController: UINavigationController?
   internal var configuration = DropdownUIConfiguration()
-  internal var topSeparator: UIView!
-//  internal var menuButton: UIButton!
-  internal var backgroundView: UIView!
-  internal var tableView: DropdownTableView!
   internal var items: [String]!
   
   lazy internal var label: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.backgroundColor = .green
     label.textColor = self.menuTitleColor
     label.font = self.configuration.navigationBarTitleFont
     label.textAlignment = self.configuration.cellTextLabelAlignment
@@ -150,7 +145,6 @@ open class DropdownView: UIView {
   lazy internal var button: UIButton = {
     let button = UIButton()
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.backgroundColor = .red
     button.addTarget(self, action: #selector(DropdownView.menuButtonTapped(_:)), for: UIControlEvents.touchUpInside)
     return button
   }()
@@ -158,39 +152,13 @@ open class DropdownView: UIView {
   lazy internal var arrowImageView: UIImageView = {
     let imageView = UIImageView(image: self.configuration.arrowImage.withRenderingMode(.alwaysTemplate))
     imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.backgroundColor = .blue
     return imageView
-  }()
-  
-  lazy internal var menuView: UIView = {
-    //TODO: change this
-    let menuViewBounds = UIApplication.shared.keyWindow!.bounds
-    let view = UIView(frame: CGRect(x: menuViewBounds.origin.x, y: 0, width: menuViewBounds.width, height: menuViewBounds.height))
-    view.viewIdentifier = "BTNavigationDropDownMenu-MenuWrapper"
-    view.clipsToBounds = true
-    view.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
-    return view
   }()
   
   //MARK: - Lifecycle
   
   required public init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-  
-  /**
-   
-   Legacy init converted as a convenience initializer to call the default init
-   
-   - parameters:
-   - navigationController: The present and visible navigation controller.
-   - containerView: The container view. Default is keyWindow.
-   - title: A string to define title to be displayed.
-   - items: The array of items to select
-   */
-  public convenience init(navigationController: UINavigationController? = nil, containerView: UIView = UIApplication.shared.keyWindow!, title: String, items: [String]) {
-    
-    self.init(navigationController: navigationController, containerView: containerView, title: DropdownTitle.title(title), items: items)
   }
   
   /**
@@ -222,16 +190,9 @@ open class DropdownView: UIView {
     // Get titleSize
     let titleSize: CGSize
     let titleToDisplay: String
-    
-    switch title{
-    case .index(let index):
-      if index < items.count{
-        titleToDisplay = items[index]
-      } else {
-        titleToDisplay = ""
-      }
-    case .title(let title):
-      titleToDisplay = title
+    switch title {
+    case .index(let index): titleToDisplay = index < items.count ? items[index] : ""
+    case .title(let title): titleToDisplay = title
     }
     
     titleSize = (titleToDisplay as NSString).size(attributes: [NSFontAttributeName:self.configuration.navigationBarTitleFont])
@@ -242,86 +203,131 @@ open class DropdownView: UIView {
     
     super.init(frame: .zero)
     self.translatesAutoresizingMaskIntoConstraints = false
+
+    removePreviousMenuViews(fromView: containerView)
+    setupDefaultConfiguration()
     
     self.isShown = false
     self.items = items
     
-    addSubview(button)
+    label.text = titleToDisplay
+    
+    self.addSubview(button)
+    button.addSubview(self.label)
+    button.addSubview(arrowImageView)
+    menuView.addSubview(backgroundView)
+    menuView.addSubview(tableView)
+    menuView.addSubview(topSeparator)
+    containerView.addSubview(self.menuView)
+
+    //MARK: - Constraints
+
     self.width(width)
     self.height(height)
+    
     button.edges(to: self)
-    
-    label.text = titleToDisplay
-    button.addSubview(self.label)
-    
-    arrowImageView = UIImageView(image: self.configuration.arrowImage.withRenderingMode(.alwaysTemplate))
-    button.addSubview(self.arrowImageView)
-    arrowImageView.backgroundColor = .blue
-    
-    let menuViewBounds = window.bounds
-    
-//    // Set up DropdownMenu
-//    self.menuView = UIView(frame: CGRect(x: menuWrapperBounds.origin.x, y: 0, width: menuWrapperBounds.width, height: menuWrapperBounds.height))
-//    self.menuView.viewIdentifier = "BTNavigationDropDownMenu-MenuWrapper"
-//    self.menuView.clipsToBounds = true
-//    self.menuView.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
-    
-    // Init background view (under table view)
-    self.backgroundView = UIView(frame: menuViewBounds)
-    self.backgroundView.backgroundColor = self.configuration.maskBackgroundColor
-    self.backgroundView.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
-    
-    let backgroundTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(DropdownView.hideMenu));
-    self.backgroundView.addGestureRecognizer(backgroundTapRecognizer)
-    
-    // Init properties
-    self.setupDefaultConfiguration()
-    
-    // Init table view
-    let navBarHeight = self.navigationController?.navigationBar.bounds.size.height ?? 0
-    let statusBarHeight = UIApplication.shared.statusBarFrame.height
-    self.tableView = DropdownTableView(frame: CGRect(x: menuViewBounds.origin.x, y: menuViewBounds.origin.y + 0.5, width: menuViewBounds.width, height: menuViewBounds.height + 300 - navBarHeight - statusBarHeight), items: items, title: titleToDisplay, configuration: self.configuration)
-    
-    self.tableView.selectRowAtIndexPathHandler = { [unowned self] (indexPath: Int) -> () in
-      self.didSelectItemAtIndexHandler!(indexPath)
-      if self.shouldChangeTitleText! {
-        self.label.text = "\(self.tableView.items[indexPath])"
-      }
-      self.hideMenu()
-      self.layoutSubviews()
-    }
-    
-    // Add background view & table view to container view
-    self.menuView.addSubview(self.backgroundView)
-    self.menuView.addSubview(self.tableView)
-    
-    // Add Line on top
-    self.topSeparator = UIView(frame: CGRect(x: 0, y: 0, width: menuViewBounds.size.width, height: 0.5))
-    self.topSeparator.autoresizingMask = UIViewAutoresizing.flexibleWidth
-    self.menuView.addSubview(self.topSeparator)
-    
-    // Remove MenuWrapper from container view to avoid leaks
-    containerView.subviews
-      .filter({$0.viewIdentifier == "BTNavigationDropDownMenu-MenuWrapper"})
-      .forEach({$0.removeFromSuperview()})
-    
-    // Add Menu View to container view
-    containerView.addSubview(self.menuView)
-    
-    // By default, hide menu view
-    self.menuView.isHidden = true
-  }
-  
-  override open func layoutSubviews() {
-    label.sizeToFit()
+
+    menuView.edges(to: containerView)
     label.center(in: self)
-    
-    arrowImageView.sizeToFit()
     arrowImageView.centerY(to: self)
     arrowImageView.leftToRight(of: label, offset: configuration.arrowPadding - (self.configuration.arrowImage.size.width / 2.0))
+
+    topSeparator.origin(to: menuView)
+    topSeparator.width(to: menuView)
+    topSeparator.height(0.5)
+
+    backgroundView.edges(to: menuView)
+
+    tableView.left(to: menuView)
+    tableView.top(to: menuView, offset: 0.5)
+    tableView.width(to: menuView)
+    tableView.height(200) //TODO: change this
     
-    self.menuView.frame.origin.y = self.navigationController!.navigationBar.frame.maxY
+//    let tableViewFrame = CGRect(x: menuViewBounds.origin.x, y: menuViewBounds.origin.y + 0.5, width: menuViewBounds.width, height: menuViewBounds.height + 300 - navBarHeight - statusBarHeight)
     
-    self.tableView.reloadData()
+    setupOtherStuff() //TODO: rename this
+  }
+
+  func setupOtherStuff() {
+    menuView.isHidden = true
+    
+    let backgroundTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(DropdownView.hideMenu));
+    backgroundView.addGestureRecognizer(backgroundTapRecognizer)
+  }
+  
+  func removePreviousMenuViews(fromView view: UIView) {
+    //TODO: try to not use this
+    // Remove MenuWrapper from container view to avoid leaks
+    view.subviews
+      .filter({$0.viewIdentifier == "BTNavigationDropDownMenu-MenuWrapper"})
+      .forEach({$0.removeFromSuperview()})
+  }
+  
+  lazy internal var backgroundView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+//    view.backgroundColor = self.configuration.maskBackgroundColor
+//    view.backgroundColor = .red
+    return view
+  }()
+
+  lazy internal var topSeparator: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.autoresizingMask = UIViewAutoresizing.flexibleWidth
+    return view
+  }()
+  
+  lazy internal var tableView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.backgroundColor = .yellow
+    return view
+  }()
+  
+//  lazy internal var tableView: DropdownTableView = {
+//    let navBarHeight = self.navigationController?.navigationBar.bounds.size.height ?? 0
+//    let statusBarHeight = UIApplication.shared.statusBarFrame.height
+//    let tableViewFrame = CGRect(x: menuViewBounds.origin.x, y: menuViewBounds.origin.y + 0.5, width: menuViewBounds.width, height: menuViewBounds.height + 300 - navBarHeight - statusBarHeight)
+//    
+//    let tableView = DropdownTableView(frame: tableViewFrame, items: items, title: titleToDisplay, configuration: self.configuration)
+//    tableView.selectRowAtIndexPathHandler = { [unowned self] (indexPath: Int) -> () in
+//      self.didSelectItemAtIndexHandler!(indexPath)
+//      if self.shouldChangeTitleText! {
+//        self.label.text = "\(self.tableView.items[indexPath])"
+//      }
+//      self.hideMenu()
+//      self.layoutSubviews()
+//    }
+//    return tableView
+//  }()
+
+  lazy internal var menuView: UIView = {
+    //    let bounds = UIApplication.shared.keyWindow!.bounds
+    //    let view = UIView(frame: CGRect(x: bounds.origin.x, y: 0, width: bounds.width, height: bounds.height))
+    //    view.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
+    
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    
+    view.viewIdentifier = "BTNavigationDropDownMenu-MenuWrapper"
+    view.clipsToBounds = true
+    return view
+  }()
+
+  override open func layoutSubviews() {
+//    label.sizeToFit()
+//    label.center(in: self)
+//    
+//    arrowImageView.sizeToFit()
+//    arrowImageView.centerY(to: self)
+//    arrowImageView.leftToRight(of: label, offset: configuration.arrowPadding - (self.configuration.arrowImage.size.width / 2.0))
+    
+//    self.menuView.frame.origin.y = self.navigationController!.navigationBar.frame.maxY
+    
+//    self.tableView.reloadData()
+    
+    print("TableView: \(tableView.frame)")
+    print("MenuView: \(menuView.frame)")
   }
 }
