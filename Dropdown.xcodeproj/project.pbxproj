@@ -20,6 +20,7 @@
 		E22D87361F36CF0300650B9A /* DropdownTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D872F1F36CF0300650B9A /* DropdownTableView.swift */; };
 		E22D87371F36CF0300650B9A /* DropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D87301F36CF0300650B9A /* DropdownTableViewCell.swift */; };
 		E2E074D51F3816EF00EA0CBD /* DropdownView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E074D41F3816EF00EA0CBD /* DropdownView+Helpers.swift */; };
+		E2E074D81F38453100EA0CBD /* TinyConstraints.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E074D71F38453100EA0CBD /* TinyConstraints.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		E22D872F1F36CF0300650B9A /* DropdownTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropdownTableView.swift; sourceTree = "<group>"; };
 		E22D87301F36CF0300650B9A /* DropdownTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropdownTableViewCell.swift; sourceTree = "<group>"; };
 		E2E074D41F3816EF00EA0CBD /* DropdownView+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "DropdownView+Helpers.swift"; path = "Source/DropdownView+Helpers.swift"; sourceTree = SOURCE_ROOT; };
+		E2E074D71F38453100EA0CBD /* TinyConstraints.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TinyConstraints.framework; path = Carthage/Build/iOS/TinyConstraints.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2E074D81F38453100EA0CBD /* TinyConstraints.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +79,7 @@
 				E206D3971F36C18E001F591F /* Source */,
 				E206D3A51F36C1CF001F591F /* Tests */,
 				E206D3961F36C18E001F591F /* Products */,
+				E2E074D61F38453100EA0CBD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -160,6 +164,14 @@
 			path = Source/Internal;
 			sourceTree = SOURCE_ROOT;
 		};
+		E2E074D61F38453100EA0CBD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E2E074D71F38453100EA0CBD /* TinyConstraints.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -182,6 +194,7 @@
 				E206D3911F36C18E001F591F /* Frameworks */,
 				E206D3921F36C18E001F591F /* Headers */,
 				E206D3931F36C18E001F591F /* Resources */,
+				E2E074D91F38453D00EA0CBD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -268,6 +281,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E2E074D91F38453D00EA0CBD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/TinyConstraints.framework",
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TinyConstraints.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E206D3901F36C18E001F591F /* Sources */ = {
@@ -416,6 +447,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -437,6 +472,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

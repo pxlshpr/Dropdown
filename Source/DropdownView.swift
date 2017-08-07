@@ -1,4 +1,5 @@
 import UIKit
+import TinyConstraints
 
 // MARK: DropdownView
 open class DropdownView: UIView {
@@ -128,13 +129,23 @@ open class DropdownView: UIView {
   internal weak var navigationController: UINavigationController?
   internal var configuration = DropdownUIConfiguration()
   internal var topSeparator: UIView!
-  internal var menuButton: UIButton!
+//  internal var menuButton: UIButton!
   internal var menuTitle: UILabel!
   internal var menuArrow: UIImageView!
   internal var backgroundView: UIView!
   internal var tableView: DropdownTableView!
   internal var items: [String]!
   internal var menuWrapper: UIView!
+  
+  lazy internal var button: UIButton = {
+    let button = UIButton(frame: .zero)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.backgroundColor = .red
+    button.addTarget(self, action: #selector(DropdownView.menuButtonTapped(_:)), for: UIControlEvents.touchUpInside)
+    return button
+  }()
+  
+  //MARK: - Lifecycle
   
   required public init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
@@ -204,26 +215,26 @@ open class DropdownView: UIView {
     let frame = CGRect(x: 0, y: 0, width: width, height: height)
     
     super.init(frame: .zero)
-//    super.init(frame:frame)
+
     self.translatesAutoresizingMaskIntoConstraints = false
+    self.width(width)
+    self.height(height)
     
     self.isShown = false
     self.items = items
     
-    // Init button as navigation title
-    self.menuButton = UIButton(frame: frame)
-    self.menuButton.addTarget(self, action: #selector(DropdownView.menuButtonTapped(_:)), for: UIControlEvents.touchUpInside)
-    self.addSubview(self.menuButton)
+    addSubview(button)
+    button.edges(to: self)
     
     self.menuTitle = UILabel(frame: frame)
     self.menuTitle.text = titleToDisplay
     self.menuTitle.textColor = self.menuTitleColor
     self.menuTitle.font = self.configuration.navigationBarTitleFont
     self.menuTitle.textAlignment = self.configuration.cellTextLabelAlignment
-    self.menuButton.addSubview(self.menuTitle)
+    button.addSubview(self.menuTitle)
     
     self.menuArrow = UIImageView(image: self.configuration.arrowImage.withRenderingMode(.alwaysTemplate))
-    self.menuButton.addSubview(self.menuArrow)
+    button.addSubview(self.menuArrow)
     
     let menuWrapperBounds = window.bounds
     
