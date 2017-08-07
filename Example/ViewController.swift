@@ -46,10 +46,10 @@ class ViewController: UIViewController {
     // "Old" version
     // menuView = DropdownView(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Dropdown Menu", items: items)
     
-    menuView = DropdownView(navigationController: self.navigationController, containerView: self.navigationController!.view, title: BTTitle.index(2), items: items)
+    menuView = DropdownView(navigationController: self.navigationController, containerView: self.navigationController!.view, title: DropdownTitle.index(2), items: items)
     
     // Another way to initialize:
-    // menuView = DropdownView(navigationController: self.navigationController, containerView: self.navigationController!.view, title: BTTitle.title("Dropdown Menu"), items: items)
+    // menuView = DropdownView(navigationController: self.navigationController, containerView: self.navigationController!.view, title: DropdownTitle.title("Dropdown Menu"), items: items)
     
     menuView.cellHeight = 50
     menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
