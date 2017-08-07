@@ -19,6 +19,7 @@
 		E22D87351F36CF0300650B9A /* DropdownCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D872E1F36CF0300650B9A /* DropdownCellContentView.swift */; };
 		E22D87361F36CF0300650B9A /* DropdownTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D872F1F36CF0300650B9A /* DropdownTableView.swift */; };
 		E22D87371F36CF0300650B9A /* DropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22D87301F36CF0300650B9A /* DropdownTableViewCell.swift */; };
+		E2E074D51F3816EF00EA0CBD /* DropdownView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E074D41F3816EF00EA0CBD /* DropdownView+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		E22D872E1F36CF0300650B9A /* DropdownCellContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropdownCellContentView.swift; sourceTree = "<group>"; };
 		E22D872F1F36CF0300650B9A /* DropdownTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropdownTableView.swift; sourceTree = "<group>"; };
 		E22D87301F36CF0300650B9A /* DropdownTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropdownTableViewCell.swift; sourceTree = "<group>"; };
+		E2E074D41F3816EF00EA0CBD /* DropdownView+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "DropdownView+Helpers.swift"; path = "Source/DropdownView+Helpers.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			children = (
 				E22D87281F36CF0300650B9A /* Images.bundle */,
 				E22D86B71F36C3F700650B9A /* DropdownView.swift */,
+				E2E074D41F3816EF00EA0CBD /* DropdownView+Helpers.swift */,
 				E22D87261F36CEB100650B9A /* DropdownTitle.swift */,
 				E22D87291F36CF0300650B9A /* Extension */,
 				E22D872C1F36CF0300650B9A /* Internal */,
@@ -275,6 +278,7 @@
 				E22D87371F36CF0300650B9A /* DropdownTableViewCell.swift in Sources */,
 				E22D87341F36CF0300650B9A /* DropdownUIConfiguration.swift in Sources */,
 				E22D87321F36CF0300650B9A /* UIView+Extension.swift in Sources */,
+				E2E074D51F3816EF00EA0CBD /* DropdownView+Helpers.swift in Sources */,
 				E22D87361F36CF0300650B9A /* DropdownTableView.swift in Sources */,
 				E22D87351F36CF0300650B9A /* DropdownCellContentView.swift in Sources */,
 				E22D87271F36CEB200650B9A /* DropdownTitle.swift in Sources */,
