@@ -30,7 +30,7 @@ import Foundation
  - parameters:
  - title: Set navigation title as string.
  - index: Set navigation title as index of items.
- Items is defined from BTNavigationDropdownMenu initialization.
+ Items is defined from DropdownView initialization.
  */
 public enum BTTitle {
   case title(String)

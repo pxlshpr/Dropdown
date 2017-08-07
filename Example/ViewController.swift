@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  BTNavigationDropdownMenu
+//  DropdownView
 //
 //  Created by Pham Ba Tho on 6/8/15.
 //  Copyright (c) 2015 PHAM BA THO. All rights reserved.
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     return .lightContent
   }
   
-  var menuView: BTNavigationDropdownMenu!
+  var menuView: DropdownView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -44,12 +44,12 @@ class ViewController: UIViewController {
     self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
     
     // "Old" version
-    // menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Dropdown Menu", items: items)
+    // menuView = DropdownView(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Dropdown Menu", items: items)
     
-    menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: BTTitle.index(2), items: items)
+    menuView = DropdownView(navigationController: self.navigationController, containerView: self.navigationController!.view, title: BTTitle.index(2), items: items)
     
     // Another way to initialize:
-    // menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: BTTitle.title("Dropdown Menu"), items: items)
+    // menuView = DropdownView(navigationController: self.navigationController, containerView: self.navigationController!.view, title: BTTitle.title("Dropdown Menu"), items: items)
     
     menuView.cellHeight = 50
     menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
